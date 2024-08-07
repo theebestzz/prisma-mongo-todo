@@ -37,3 +37,20 @@ export async function updateTodoStatus(id: string, isCompleted: boolean) {
 
   revalidateTag("todos");
 }
+
+export async function editTodo(id: string, title: string) {
+  await prisma.todo.update({
+    where: { id },
+    data: { title },
+  });
+
+  revalidateTag("todos");
+}
+
+export async function deleteTodo(id: string) {
+  await prisma.todo.delete({
+    where: { id },
+  });
+
+  revalidateTag("todos");
+}
